@@ -4,8 +4,6 @@
 import copy as cp
 from ctypes import *
 
-import numpy as np
-
 from common import Face, _Face, _Image
 
 detect_lib = cdll.LoadLibrary('../SeetaFaceEngine/library/libseeta_fd_lib.dylib')
@@ -41,7 +39,7 @@ class Detector(object):
         self.set_window_step() 
 
     def detect(self, image):
-        if np.ndim(image) != 2:
+        if image.ndim != 2:
             raise ValueError('The input not a gray scale image!')
         image_data = _Image()
         image_data.height, image_data.width = image.shape
@@ -84,15 +82,17 @@ if __name__ == '__main__':
             
     def test():
         import cv2
+
+        detector = Detector('../SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
+       
         im_color = cv2.imread('/Users/tuxiaokang/Downloads/2.png')
         im_gray = cv2.cvtColor(im_color, cv2.COLOR_BGR2GRAY)
 
-        detector = Detector('../SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
         faces = detector.detect(im_gray)
 
-        for face in faces:
-            print(face.left, face.top, face.right, face.bottom, face.score)
-            cv2.rectangle(im_color, (face.left,face.top),(face.right, face.bottom), (255,0,0),3)
-        cv2.imshow('x', im_color)
-        cv2.waitKey(0)
+        #for face in faces:
+        #    print(face.left, face.top, face.right, face.bottom, face.score)
+        #    cv2.rectangle(im_color, (face.left,face.top),(face.right, face.bottom), (255,0,0),3)
+        #cv2.imshow('x', im_color)
+        #cv2.waitKey(0)
     test()
