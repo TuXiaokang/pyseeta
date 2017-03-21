@@ -74,25 +74,27 @@ class Detector(object):
     def set_window_step(self, window_step=[4,4]):
         detect_lib.set_window_step(self.detector, window_step[0], window_step[1])
     
-    def close(self):
+    def release(self):
         detect_lib.free_detector(self.detector)
 
 
 if __name__ == '__main__':
-            
-    def test():
-        import cv2
-
-        detector = Detector('../SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
-       
-        im_color = cv2.imread('/Users/tuxiaokang/Downloads/2.png')
-        im_gray = cv2.cvtColor(im_color, cv2.COLOR_BGR2GRAY)
-
-        faces = detector.detect(im_gray)
-
-        #for face in faces:
-        #    print(face.left, face.top, face.right, face.bottom, face.score)
-        #    cv2.rectangle(im_color, (face.left,face.top),(face.right, face.bottom), (255,0,0),3)
-        #cv2.imshow('x', im_color)
-        #cv2.waitKey(0)
-    test()
+    import cv2
+    # load model
+    detector = Detector('../SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
+    # load image
+    im_color = cv2.imread('/Users/tuxiaokang/Downloads/2.png')
+    im_gray = cv2.cvtColor(im_color, cv2.COLOR_BGR2GRAY)
+    # detect face
+    faces = detector.detect(im_gray)
+    # draw each face bounding box
+    for face in faces:
+        # print information of face
+        print('([{},{},{},{})=>{}'.format(face.left,face.top,face.right,face.bottom,face.score))
+        # draw rectangle
+        cv2.rectangle(im_color, (face.left,face.top), (face.right, face.bottom), (255,0,0), 3)
+    # show result
+    cv2.imshow('test', im_color)
+    cv2.waitKey(0)
+    # release detecor
+    detector.release()
