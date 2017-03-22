@@ -14,7 +14,7 @@ DYLIB_EXT = {
     'linux' : 'libseeta_fi_lib.so'
     }
 
-DETECT_LIB_PATH = '../SeetaFaceEngine/library'
+SEETA_LIB_PATH = '../SeetaFaceEngine/library'
 
 if DYLIB_EXT.get(sys.platform) is None:
     raise EnvironmentError('System not support!')
@@ -24,7 +24,7 @@ lib_path = find_library('seeta_fi_lib')
 if lib_path is not None:
     identi_lib = cdll.LoadLibrary(lib_path)
 else:
-    identi_lib = cdll.LoadLibrary('{}/{}'.format(DETECT_LIB_PATH, DYLIB_EXT[sys.platform]))
+    identi_lib = cdll.LoadLibrary('{}/{}'.format(SEETA_LIB_PATH, DYLIB_EXT[sys.platform]))
 
 c_float_p = POINTER(c_float)
 
