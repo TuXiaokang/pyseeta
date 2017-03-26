@@ -91,6 +91,7 @@ class Detector(object):
         # free face data
         detect_lib.free_face_list(face_data)
         image_data = None
+        faces.sort(key=lambda i: (i.bottom - i.top) * (i.right - i.left))
         return faces
     
     def set_image_pyramid_scale_factor(self, scale_factor=0.8):
