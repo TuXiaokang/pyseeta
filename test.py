@@ -8,9 +8,9 @@ from pyseeta import Identifier
 def test():
     import cv2
     # load model
-    detector = Detector('../SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
-    aligner = Aligner('../SeetaFaceEngine/model/seeta_fa_v1.1.bin')
-    identifier = Identifier('../SeetaFaceEngine/model/seeta_fr_v1.0.bin')
+    detector = Detector('SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
+    aligner = Aligner('SeetaFaceEngine/model/seeta_fa_v1.1.bin')
+    identifier = Identifier('SeetaFaceEngine/model/seeta_fr_v1.0.bin')
     # load image
     im_color = cv2.imread('/Users/tuxiaokang/Downloads/2.png')
     im_gray = cv2.cvtColor(im_color, cv2.COLOR_BGR2GRAY)
