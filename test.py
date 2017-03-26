@@ -9,8 +9,8 @@ def test():
     import cv2, os
     # load model
     detector = Detector('SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
-    #aligner = Aligner('SeetaFaceEngine/model/seeta_fa_v1.1.bin')
-    #identifier = Identifier('SeetaFaceEngine/model/seeta_fr_v1.0.bin')
+    aligner = Aligner('SeetaFaceEngine/model/seeta_fa_v1.1.bin')
+    identifier = Identifier('SeetaFaceEngine/model/seeta_fr_v1.0.bin')
     video_dir = '/Users/tuxiaokang/Downloads/Casia/1'
     #video_path_list =[os.path.join(video_dir, x) for x in os.listdir(video_dir)]
     video_path_list = ['/Users/tuxiaokang/Downloads/Casia/train_release/19/HR_1.avi']
@@ -24,13 +24,17 @@ def test():
                 break
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             faces = detector.detect(gray)
-            if len(faces) == 0:
-                i += 1
+            if not len(faces):
+                continue
+            landmarks = aligner.align(gray, faces[0])
+            im_crop = identifier.crop_face(frame, landmarks)
+            # TODO: extract feature
+
             # for face in faces:
             #     print(face.left, face.top, face.right, face.bottom)
             #     cv2.rectangle(frame, (face.left, face.top), (face.right, face.bottom), (0,255,0),3)
-            # cv2.imshow('video', frame)
-            # cv2.waitKey(3)
+            cv2.imshow('video', im_crop)
+            cv2.waitKey(3)
         print(i)
         cap.release()
     """
@@ -53,8 +57,8 @@ def test():
         print('similarity: ', sim)
     """
     # release
-    #identifier.release()
-    #aligner.release()
+    identifier.release()
+    aligner.release()
     detector.release()
 
 if __name__ == '__main__':
