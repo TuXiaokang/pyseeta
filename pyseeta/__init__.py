@@ -1,6 +1,6 @@
 
 __all__ = ['aligner', 'identifier', 'detector']
 
-from seeta.detector import Detector
-from seeta.aligner import Aligner
-from seeta.identifier import Identifier
+from pyseeta.detector import Detector
+from pyseeta.aligner import Aligner
+from pyseeta.identifier import Identifier

@@ -9,11 +9,11 @@ import sys
 
 DYLIB_EXT = {
     'darwin': 'libseeta_fa_lib.dylib',
-    'win32' : '/release/libseeta_fa_lib.dll',
+    'win32' : 'seeta_fa_lib.dll',
     'linux' : 'libseeta_fa_lib.so'
     }
 
-SEETA_LIB_PATH = '../SeetaFaceEngine/library'
+SEETA_LIB_PATH = 'SeetaFaceEngine/library'
 
 if DYLIB_EXT.get(sys.platform) is None:
     raise EnvironmentError('System not support!')
