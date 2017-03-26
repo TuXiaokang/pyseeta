@@ -1,9 +1,9 @@
 """ This is license
 """
 
-from seeta import Detector
-from seeta import Aligner
-from seeta import Identifier
+from pyseeta import Detector
+from pyseeta import Aligner
+from pyseeta import Identifier
 
 def test():
     import cv2
