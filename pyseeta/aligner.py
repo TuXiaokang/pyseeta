@@ -1,5 +1,24 @@
-""" This is license
-"""
+# MIT License
+
+# Copyright (c) 2017 Tuxedo
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 
 
 from ctypes import *
@@ -40,6 +59,8 @@ class Aligner(object):
         input\n
         @param model_path: the path of aligner model
         """
+        if model_path is None:
+            model_path = 'SeetaFaceEngine/model/seeta_fa_v1.1.bin'
         byte_model_path = bytes(model_path, encoding='utf-8')
         self.aligner = align_lib.get_face_aligner(byte_model_path)
     
@@ -48,7 +69,7 @@ class Aligner(object):
         input:\n 
         @param image: a gray scale image.\n
         @param face: a face object.\n
-        output: a list of point(x,y)
+        output: a list of point (x,y)
         """
         if image.ndim != 2:
             raise ValueError('The input not a gray scale image!')
@@ -56,8 +77,7 @@ class Aligner(object):
         image_data = _Image()
         image_data.height, image_data.width = image.shape
         image_data.channels = 1
-        data = (c_ubyte * image.size)(*image.tobytes())
-        image_data.data = cast(data, c_void_p)
+        image_data.data = image.ctypes.data
         # prepare face data
         face_data = _Face()
         face_data.left   = face.left

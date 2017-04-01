@@ -1,5 +1,25 @@
-""" This is license
-"""
+# MIT License
+
+# Copyright (c) 2017 Tuxedo
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 from ctypes import *
 from .common import _Face, _Image, _LandMarks
 import copy as cp
@@ -49,19 +69,26 @@ identi_lib.free_identifier.argtypes = [c_void_p]
 class Identifier(object):
     """ Class for Face identification
     """
-    def __init__(self, model_path):
+    def __init__(self, model_path=None):
+        if model_path is None:
+            model_path = 'SeetaFaceEngine/model/seeta_fr_v1.0.bin'
         byte_model_path = bytes(model_path, encoding='utf-8')
         self.identifier = identi_lib.get_face_identifier(byte_model_path)
 
     def crop_face(self, image, landmarks):
         """ Crop face image from original image
+        Args:
+            image: a color image
+            landmarks: a list of point (x,y), length is five
+        
+        Returns:
+            a numpy array image
         """
         # prepare image data
         image_data = _Image()
         image_data.height, image_data.width = image.shape[:2]
         image_data.channels = 1 if image.ndim == 2 else image.shape[2]
-        byte_data = (c_ubyte * image.size)(*image.tobytes())
-        image_data.data = cast(byte_data, c_void_p)
+        image_data.data = image.ctypes.data
         # prepare landmarks
         marks_data = _LandMarks()
         for i in range(5):
@@ -81,6 +108,11 @@ class Identifier(object):
 
     def extract_feature(self, image):
         """ Extract feature of cropped face image
+        Args:
+            image: a color image
+        
+        Returns:
+            a list of float, the length is 2048
         """
         # prepare image data
         image_data = _Image()
@@ -98,6 +130,11 @@ class Identifier(object):
 
     def extract_feature_with_crop(self, image, landmarks):
         """ Extract feature of face
+        Args:
+            image: a color image
+            landmarks: a list of point (x,y), length is five
+        Returns:
+            a list of float, the length is 2048
         """
         # prepare image data
         image_data = _Image()
@@ -119,6 +156,11 @@ class Identifier(object):
 
     def calc_similarity(self, featA, featB):
         """ Calculate similarity of 2 feature
+        Args:
+            featA: a list of float, the length is 2048
+            featB: a list of float, the length is 2048
+        Returns:
+            a list of float, the length is 2048        
         """
         # prepare feature array
         feat_a = (c_float * 2048)(*featA)

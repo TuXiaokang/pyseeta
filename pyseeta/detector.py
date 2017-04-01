@@ -1,5 +1,24 @@
-""" This is license
-"""
+# MIT License
+
+# Copyright (c) 2017 Tuxedo
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 
 import copy as cp
 import sys
@@ -50,10 +69,12 @@ class Detector(object):
     """ Class for face detecor
     """
     
-    def __init__(self, model_path):
+    def __init__(self, model_path=None):
         """ 
         input: the path of detecor model file
         """
+        if model_path is None:
+            model_path = 'SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin'
         byte_model_path = bytes(model_path, encoding='utf-8')
         self.detector = detect_lib.get_face_detector(byte_model_path)
         self.set_image_pyramid_scale_factor()
@@ -63,8 +84,10 @@ class Detector(object):
 
     def detect(self, image):
         """ 
-        input: a gray scale image which can be a PIL image or a opencv image.\n
-        output: a list of Face object
+        Args:
+            image: a gray scale image which can be a PIL image or a opencv image.\n
+        Returns:
+            a list of Face object
         """
         if image.ndim != 2:
             raise ValueError('The input not a gray scale image!')
@@ -72,8 +95,7 @@ class Detector(object):
         image_data = _Image()
         image_data.height, image_data.width = image.shape
         image_data.channels  = 1
-        byte_data = (c_ubyte * image.size)(*image.tobytes())
-        image_data.data = cast(byte_data, c_void_p)
+        image_data.data = image.ctypes.data
         # call detect function
         face_data = detect_lib.detect(self.detector, byref(image_data))
         # read faces
