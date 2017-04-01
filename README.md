@@ -19,4 +19,4 @@ python api for SeetaFaceEngine(https://github.com/seetaface/SeetaFaceEngine.git)
 > python setup.py install
 > ```
 # tips
->  If you want to use function of faceidentification, you need decompress the `seeta_fr_v1.0.part.1.rar` which located in the `SeetaFaceEngine/model`
+>  If you want to use function of faceidentification, you need decompress the `seeta_fr_v1.0.part.1.rar` which located in `SeetaFaceEngine/model`
