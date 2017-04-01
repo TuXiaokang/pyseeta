@@ -12,7 +12,7 @@ python api for SeetaFaceEngine(https://github.com/seetaface/SeetaFaceEngine.git)
 > ```
 4  Add the dynamic path to system environment variables.
 > + on linux & macOS, the default is `SeetaFaceEngine/library`
-> + on windows, the default is  `SeetaFaceEngine/library/release/`
+> + on windows, the default is  `SeetaFaceEngine/library/[release or debug]/`
 5. install pyseeta
 > ```bash
 > python setup.py build
