@@ -29,7 +29,7 @@ from .common import Face, _Face, _Image
 
 DYLIB_EXT = {
     'darwin': 'libseeta_fd_lib.dylib',
-    'win32' : 'seeta_fd_lib.dll',
+    'win32' : 'Release/seeta_fd_lib.dll',
     'linux' : 'libseeta_fd_lib.so'
     }
 

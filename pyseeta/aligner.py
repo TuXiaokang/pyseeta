@@ -28,7 +28,7 @@ import sys
 
 DYLIB_EXT = {
     'darwin': 'libseeta_fa_lib.dylib',
-    'win32' : 'seeta_fa_lib.dll',
+    'win32' : 'Release/seeta_fa_lib.dll',
     'linux' : 'libseeta_fa_lib.so'
     }
 

@@ -30,7 +30,7 @@ from ctypes.util import find_library
 
 DYLIB_EXT = {
     'darwin': 'libseeta_fi_lib.dylib',
-    'win32' : 'seeta_fi_lib.dll',
+    'win32' : 'Release/seeta_fi_lib.dll',
     'linux' : 'libseeta_fi_lib.so'
     }
 
