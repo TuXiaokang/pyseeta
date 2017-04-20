@@ -24,7 +24,7 @@
 from ctypes import *
 from ctypes.util import find_library
 from .common import _Face, _LandMarks, _Image
-import sys
+import sys, os
 
 DYLIB_EXT = {
     'darwin': 'libseeta_fa_lib.dylib',
@@ -32,7 +32,7 @@ DYLIB_EXT = {
     'linux' : 'libseeta_fa_lib.so'
     }
 
-SEETA_LIB_PATH = 'SeetaFaceEngine/library'
+SEETA_LIB_PATH = os.path.abspath('.') + '/SeetaFaceEngine/library'
 
 if DYLIB_EXT.get(sys.platform) is None:
     raise EnvironmentError('System not support!')

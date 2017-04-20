@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 import copy as cp
+import os
 import sys
 from ctypes import *
 from ctypes.util import find_library
@@ -33,8 +34,7 @@ DYLIB_EXT = {
     'linux' : 'libseeta_fd_lib.so'
     }
 
-SEETA_LIB_PATH = 'SeetaFaceEngine/library'
-
+SEETA_LIB_PATH = os.path.abspath('.') + '/SeetaFaceEngine/library'
 
 if DYLIB_EXT.get(sys.platform) is None:
     raise EnvironmentError('System not support!')

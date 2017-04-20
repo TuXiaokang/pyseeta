@@ -24,7 +24,7 @@ from ctypes import *
 from .common import _Face, _Image, _LandMarks
 import copy as cp
 import numpy as np
-import sys
+import sys, os
 from ctypes.util import find_library
 
 
@@ -34,7 +34,7 @@ DYLIB_EXT = {
     'linux' : 'libseeta_fi_lib.so'
     }
 
-SEETA_LIB_PATH = 'SeetaFaceEngine/library'
+SEETA_LIB_PATH = os.path.abspath('.') + '/SeetaFaceEngine/library'
 
 if DYLIB_EXT.get(sys.platform) is None:
     raise EnvironmentError('System not support!')
