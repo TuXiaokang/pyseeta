@@ -95,7 +95,7 @@ def test_identifier():
             featB = identifier.extract_feature_with_crop(image_color_B, landmarks_B)
             sim = identifier.calc_similarity(featA, featB)
             sim_list.append(sim)
-        print(sim_list)
+        print('sim: {}'.format(sim_list))
         index = np.argmax(sim_list)
         for i, face in enumerate(faces_B):
             color = (0,255,0) if i == index else (0,0,255)
