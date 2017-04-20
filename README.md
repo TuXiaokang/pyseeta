@@ -23,10 +23,9 @@ python api for SeetaFaceEngine(https://github.com/seetaface/SeetaFaceEngine.git)
 4.  Add the dynamic lib path to system environment variables.
     + on linux & macOS, the default is `SeetaFaceEngine/library`
     + on windows, the default is  `SeetaFaceEngine/library/Release`
-5. install pyseeta
+5. run test
     ```bash
-    python setup.py build
-    python setup.py install
+    python test.py
     ```
 # tips
 If you want to use function of faceidentification, you need decompress the `seeta_fr_v1.0.part.1.rar` which located in `SeetaFaceEngine/model`
