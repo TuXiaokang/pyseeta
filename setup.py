@@ -39,8 +39,6 @@ setup(
     keywords = 'pyseeta seetaface facedetection facealignment faceidentification',
     
     packages = find_packages(),
-    
-    install_requires = ['rarfile'],
 
     include_package_data = True,
 
