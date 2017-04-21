@@ -24,25 +24,15 @@
 from ctypes import *
 from ctypes.util import find_library
 from .common import _Face, _LandMarks, _Image
+from .config import get_aligner_library
 import sys, os
-
-DYLIB_EXT = {
-    'darwin': 'libseeta_fa_lib.dylib',
-    'win32' : 'Release/seeta_fa_lib.dll',
-    'linux' : 'libseeta_fa_lib.so'
-    }
-
-SEETA_LIB_PATH = os.path.abspath('.') + '/SeetaFaceEngine/library'
-
-if DYLIB_EXT.get(sys.platform) is None:
-    raise EnvironmentError('System not support!')
 
 lib_path = find_library('seeta_fa_lib')
 
-if lib_path is not None:
-    align_lib = cdll.LoadLibrary(lib_path)
-else:
-    align_lib = cdll.LoadLibrary('{}/{}'.format(SEETA_LIB_PATH, DYLIB_EXT[sys.platform]))
+if lib_path is None:
+    lib_path = get_aligner_library()
+
+align_lib = cdll.LoadLibrary(lib_path)
 
 align_lib.get_face_aligner.restype = c_void_p
 align_lib.get_face_aligner.argtypes = [c_char_p]

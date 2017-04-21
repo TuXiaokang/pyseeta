@@ -27,24 +27,14 @@ from ctypes import *
 from ctypes.util import find_library
 
 from .common import Face, _Face, _Image
-
-DYLIB_EXT = {
-    'darwin': 'libseeta_fd_lib.dylib',
-    'win32' : 'Release/seeta_fd_lib.dll',
-    'linux' : 'libseeta_fd_lib.so'
-    }
-
-SEETA_LIB_PATH = os.path.abspath('.') + '/SeetaFaceEngine/library'
-
-if DYLIB_EXT.get(sys.platform) is None:
-    raise EnvironmentError('System not support!')
+from .config import get_detector_library
 
 lib_path = find_library('seeta_fd_lib')
 
-if lib_path is not None:
-    detect_lib = cdll.LoadLibrary(lib_path)
-else:
-    detect_lib = cdll.LoadLibrary('{}/{}'.format(SEETA_LIB_PATH, DYLIB_EXT[sys.platform]))
+if lib_path is None:
+    lib_path = get_detector_library()
+
+detect_lib = cdll.LoadLibrary(lib_path)
 
 detect_lib.detect.restype = POINTER(_Face)
 detect_lib.detect.argtypes = [c_void_p, POINTER(_Image)]

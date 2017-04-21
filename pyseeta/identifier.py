@@ -20,31 +20,23 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from ctypes import *
-from .common import _Face, _Image, _LandMarks
 import copy as cp
-import numpy as np
-import sys, os
+import os
+import sys
+from ctypes import *
 from ctypes.util import find_library
 
+import numpy as np
 
-DYLIB_EXT = {
-    'darwin': 'libseeta_fi_lib.dylib',
-    'win32' : 'Release/seeta_fi_lib.dll',
-    'linux' : 'libseeta_fi_lib.so'
-    }
-
-SEETA_LIB_PATH = os.path.abspath('.') + '/SeetaFaceEngine/library'
-
-if DYLIB_EXT.get(sys.platform) is None:
-    raise EnvironmentError('System not support!')
+from .common import _Face, _Image, _LandMarks
+from .config import get_identifier_library
 
 lib_path = find_library('seeta_fi_lib')
 
-if lib_path is not None:
-    identi_lib = cdll.LoadLibrary(lib_path)
-else:
-    identi_lib = cdll.LoadLibrary('{}/{}'.format(SEETA_LIB_PATH, DYLIB_EXT[sys.platform]))
+if lib_path is None:
+    lib_path = get_identifier_library()
+
+identi_lib = cdll.LoadLibrary(lib_path)
 
 c_float_p = POINTER(c_float)
 
