@@ -25,6 +25,7 @@ python api for SeetaFaceEngine(https://github.com/seetaface/SeetaFaceEngine.git)
     + on windows, the default is  `SeetaFaceEngine/library/Release`
 5. run test
     ```bash
+    python setup.py install
     python test.py
     ```
 # tips
