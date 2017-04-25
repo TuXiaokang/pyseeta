@@ -43,8 +43,8 @@ def test_detector():
         cv2.putText(image_color, str(i), (face.left, face.bottom),cv2.FONT_HERSHEY_COMPLEX, 1, (0,255,0), thickness=1)
     cv2.imshow('test', image_color)
     cv2.waitKey(0)
-
-    identifier.release()
+ 
+    detector.release()
 
 def test_aligner():
     import cv2
@@ -65,7 +65,7 @@ def test_aligner():
     
     cv2.imshow('test aligner', image_color)
     cv2.waitKey(0)
-    
+   
     aligner.release()
     detector.release()
 
