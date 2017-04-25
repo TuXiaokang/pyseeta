@@ -30,13 +30,13 @@ def get_library_raise(name):
     dir = os.path.dirname(__file__)
     dlib = os.path.join(dir, '../SeetaFaceEngine/Release', config[sys.platform][name])
     if os.path.exists(dlib) and os.path.isfile(dlib):
-	return dlib
+        return dlib
     dlib = os.path.join(dir, '../SeetaFaceEngine/library', config[sys.platform][name])
     if os.path.exists(dlib) and os.path.isfile(dlib):
-	return dlib
+        return dlib
     dlib = os.path.join(dir, '../SeetaFaceEngine/library/Release', config[sys.platform][name])
     if os.path.exists(dlib) and os.path.isfile(dlib):
-	return dlib
+        return dlib
     raise RuntimeError("SeetaFaceEngine %s dynamic library %s can't find"%(name,config[sys.platform][name]))
 
 def get_detector_library():
