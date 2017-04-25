@@ -1,5 +1,17 @@
 # pyseeta
 python api for SeetaFaceEngine(https://github.com/seetaface/SeetaFaceEngine.git)
+## for detection
+<img src="images/chloecalmon_det.jpg" width = '70%'/>
+
+## for alignment
+<img src="images/chloecalmon_align.jpg" width = '70%'/>
+
+## for identification
+<div align='center'>
+    <img src="images/single_id.jpg" width = "300"/>
+    <img src="images/double_id.jpg" width = "400"/>
+</div>
+
 # installation
 1. Download pyseeta(https://github.com/TuXiaokang/pyseeta.git)
 2. `git submodule update --init --recursive`
@@ -20,9 +32,8 @@ python api for SeetaFaceEngine(https://github.com/seetaface/SeetaFaceEngine.git)
     cmake -G "Visual Studio 14 2015 Win64" ..
     cmake --build . --config Release
     ```
-4.  Add the dynamic lib path to system environment variables.
-    + on linux & macOS, the default is `SeetaFaceEngine/library`
-    + on windows, the default is  `SeetaFaceEngine/library/Release`
+4. the generated dynamic lib is in `SeetaFaceEngine/Release`
+
 5. run test
 
     on ubuntu

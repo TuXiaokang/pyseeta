@@ -18,16 +18,22 @@ config = {
         'aligner': 'libseeta_fa_lib.so',
         'identifier': 'libseeta_fi_lib.so'
     },
-    # Ubuntu 16.04 x64 Python 2.7.12 (default, Nov 19 2016, 06:48:10) sys.platform return 'linux2'
-    'linux2': {
-        'detector': 'libseeta_fd_lib.so',
-        'aligner': 'libseeta_fa_lib.so',
-        'identifier': 'libseeta_fi_lib.so'
-    }
 }
+
+def get_sys_platform():
+    sp = sys.platform
+    if sp.startswith('win'):
+        return 'win32'
+    elif sp.startswith('linux'):
+        return 'linux'
+    elif sp.startswith('darwin'):
+        return 'darwin'
+    else:
+        raise EnvironmentError('{} is not supproted'.format(sp))
 
 def get_library_raise(name):
     dir = os.path.dirname(__file__)
+    platform = get_sys_platform()
     dlib = os.path.join(dir, '../SeetaFaceEngine/Release', config[sys.platform][name])
     if os.path.exists(dlib) and os.path.isfile(dlib):
         return dlib
@@ -47,3 +53,4 @@ def get_aligner_library():
 
 def get_identifier_library():
     return get_library_raise('identifier')
+

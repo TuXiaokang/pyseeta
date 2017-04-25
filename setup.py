@@ -2,14 +2,8 @@ from setuptools import setup, find_packages
 import sys, os
 
 dylib_dir = 'SeetaFaceEngine/Release'
-cpylibs = [os.path.join(dylib_dir, x) for x in os.listdir(dylib_dir)]
+dylibs = [os.path.join(dylib_dir, x) for x in os.listdir(dylib_dir) if os.path.isfile(x)]
 
-dylibs = []
-#print cpylibs
-for f in cpylibs :
-	if os.path.isfile(f) :
-		dylibs.append(f)
-#print dylibs
 
 setup(
     name ='pyseeta',
@@ -46,6 +40,8 @@ setup(
     keywords = 'pyseeta seetaface facedetection facealignment faceidentification',
     
     packages = find_packages(),
+
+    install_requires = ['numpy'],
 
     include_package_data = True,
 
