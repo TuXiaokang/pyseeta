@@ -36,9 +36,14 @@ python api for SeetaFaceEngine(https://github.com/seetaface/SeetaFaceEngine.git)
 
 5. run test
 
-    on ubuntu or unix
+    on ubuntu
 	```bash
 	sudo python setup.py install
+	sudo apt-get install unrar
+	cd SeetaFaceEngine/model/
+	unrar e seeta_fr_v1.0.part1.rar
+	cd ..
+	cd ..
 	python test.py
 	```
     on windows

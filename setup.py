@@ -4,6 +4,7 @@ import sys, os
 dylib_dir = 'SeetaFaceEngine/Release'
 dylibs = [os.path.join(dylib_dir, x) for x in os.listdir(dylib_dir) if os.path.isfile(x)]
 
+
 setup(
     name ='pyseeta',
         

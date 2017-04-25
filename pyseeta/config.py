@@ -17,7 +17,7 @@ config = {
         'detector': 'libseeta_fd_lib.so',
         'aligner': 'libseeta_fa_lib.so',
         'identifier': 'libseeta_fi_lib.so'
-    }
+    },
 }
 
 def get_sys_platform():
@@ -31,18 +31,26 @@ def get_sys_platform():
     else:
         raise EnvironmentError('{} is not supproted'.format(sp))
 
-def get_detector_library():
+def get_library_raise(name):
     dir = os.path.dirname(__file__)
-    sp = get_sys_platform()
-    path = os.path.join(dir, '../SeetaFaceEngine/Release', config[sp]['detector'])
-    return path
+    platform = get_sys_platform()
+    dlib = os.path.join(dir, '../SeetaFaceEngine/Release', config[platform][name])
+    if os.path.exists(dlib) and os.path.isfile(dlib):
+        return dlib
+    dlib = os.path.join(dir, '../SeetaFaceEngine/library', config[platform][name])
+    if os.path.exists(dlib) and os.path.isfile(dlib):
+        return dlib
+    dlib = os.path.join(dir, '../SeetaFaceEngine/library/Release', config[platform][name])
+    if os.path.exists(dlib) and os.path.isfile(dlib):
+        return dlib
+    raise RuntimeError("SeetaFaceEngine %s dynamic library %s can't find"%(name,config[platform][name]))
+
+def get_detector_library():
+    return get_library_raise('detector')
 
 def get_aligner_library():
-    dir = os.path.dirname(__file__)
-    sp = get_sys_platform()
-    return os.path.join(dir, '../SeetaFaceEngine/Release', config[sp]['aligner'])
+    return get_library_raise('aligner')
 
 def get_identifier_library():
-    dir = os.path.dirname(__file__)
-    sp = get_sys_platform()
-    return os.path.join(dir, '../SeetaFaceEngine/Release', config[sp]['identifier'])  
+    return get_library_raise('identifier')
+
