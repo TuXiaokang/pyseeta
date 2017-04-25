@@ -1,3 +1,4 @@
+dist: trusty
 sudo: required
 
 language: python
@@ -9,15 +10,17 @@ python:
 git:
   submodules: false
 
+compiler:
+  - g++
+
 add_ons:
   apt:
     packages:
-      - g++
-
+      - g++-6
+      - gcc-6
+      - cmake
 
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install cmake -y
   - git submodule update --init --recursive
   - cd SeetaFaceEngine && mkdir Release && cd Release && cmake .. && make && popd
 
