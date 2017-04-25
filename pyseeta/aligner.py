@@ -51,6 +51,8 @@ class Aligner(object):
         """
         if model_path is None:
             model_path = 'SeetaFaceEngine/model/seeta_fa_v1.1.bin'
+        if not os.path.isfile(model_path):
+            raise RuntimeError('No such file')
         byte_model_path = model_path.encode('utf-8')
         self.aligner = align_lib.get_face_aligner(byte_model_path)
     

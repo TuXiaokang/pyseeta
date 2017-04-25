@@ -64,6 +64,8 @@ class Identifier(object):
     def __init__(self, model_path=None):
         if model_path is None:
             model_path = 'SeetaFaceEngine/model/seeta_fr_v1.0.bin'
+        if not os.path.isfile(model_path):
+            raise RuntimeError('No such file')
         byte_model_path = model_path.encode('utf-8')
         self.identifier = identi_lib.get_face_identifier(byte_model_path)
 
@@ -90,7 +92,7 @@ class Identifier(object):
         # read crop data
         contents = crop_data.contents
         crop_shape = (contents.height, contents.width, contents.channels)
-        nb_pixels = crop_shape[0] * crop_shape[1] * crop_shape[2]
+        nb_pixels = np.product(crop_shape)
         byte_data = cast(contents.data, POINTER(c_ubyte))
         byte_data = (c_ubyte * nb_pixels)(*byte_data[:nb_pixels])
         image_crop = np.fromstring(byte_data, dtype=np.uint8).reshape(crop_shape)
@@ -110,12 +112,11 @@ class Identifier(object):
         image_data = _Image()
         image_data.height, image_data.width = image.shape[0:2]
         image_data.channels = 1 if image.ndim == 2 else image.shape[2]
-        byte_data = (c_ubyte * image.size)(*image.tobytes())
-        image_data.data = cast(byte_data, c_void_p)
+        image_data.data = image.ctypes.data
         # call extract_feature function
         root = identi_lib.extract_feature(self.identifier, byref(image_data))
         # read feature
-        feat = [root[i] for i in range(2048)]
+        feat = root[:2048]
         # free feature
         identi_lib.free_feature(root)
         return feat
@@ -132,8 +133,7 @@ class Identifier(object):
         image_data = _Image()
         image_data.height, image_data.width = image.shape[:2]
         image_data.channels = 1 if image.ndim == 2 else image.shape[2]
-        byte_data = image.tobytes()
-        image_data.data = cast(byte_data, c_void_p)
+        image_data.data = image.ctypes.data
         # prepare landmarks
         marks_data = _LandMarks()
         for i in range(5):
@@ -141,7 +141,7 @@ class Identifier(object):
         # call extract_feature_with_crop function
         root = identi_lib.extract_feature_with_crop(self.identifier, byref(image_data), byref(marks_data))
         # read feature
-        feat = [root[i] for i in range(2048)]
+        feat = root[:2048]
         # free feature
         identi_lib.free_feature(root)
         return feat
