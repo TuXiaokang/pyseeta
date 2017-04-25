@@ -1,5 +1,16 @@
 # pyseeta
 python api for SeetaFaceEngine(https://github.com/seetaface/SeetaFaceEngine.git)
+## For detection & Alignment
+|Face Detectin|Face Alignment|
+|-|-|
+|![](images/chloecalmon_det.jpg)|![](images/chloecalmon_Align.jpg)|
+
+## For identification
+|||
+|-|-|
+|![](images/single_id.jpg)|![](images/double_id.jpg)|
+
+
 # installation
 1. Download pyseeta(https://github.com/TuXiaokang/pyseeta.git)
 2. `git submodule update --init --recursive`
