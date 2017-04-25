@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 import sys, os
+from pyseeta import config
 
 dylib_dir = 'SeetaFaceEngine/Release'
-dylibs = [os.path.join(dylib_dir, x) for x in os.listdir(dylib_dir) if os.path.isfile(x)]
-
+dylibs = [os.path.join(dylib_dir, x) for x in os.listdir(dylib_dir) if x.split('.')[-1] in ['dll', 'so', 'dylib']]
 
 setup(
     name ='pyseeta',
