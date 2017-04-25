@@ -17,6 +17,12 @@ config = {
         'detector': 'libseeta_fd_lib.so',
         'aligner': 'libseeta_fa_lib.so',
         'identifier': 'libseeta_fi_lib.so'
+    },
+    # Ubuntu 16.04 x64 Python 2.7.12 (default, Nov 19 2016, 06:48:10) sys.platform return 'linux2'
+    'linux2': {
+        'detector': 'libseeta_fd_lib.so',
+        'aligner': 'libseeta_fa_lib.so',
+        'identifier': 'libseeta_fi_lib.so'
     }
 }
 
