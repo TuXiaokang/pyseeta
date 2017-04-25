@@ -31,14 +31,14 @@ setup(
         'Topic :: Software Development :: Debuggers',
         'Topic :: Software Development :: Embedded Systems',
         
-        'License :: OSI Approved :: BSD License',
+        'License :: OSI Approved :: MIT License',
 
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5'
     ],
     
-    keywords = 'pyseeta seetaface facedetection facealignment faceidentification',
+    keywords = 'pyseeta seetaface face-detection face-alignment face-identification',
     
     packages = find_packages(),
 
