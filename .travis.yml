@@ -18,7 +18,6 @@ add_ons:
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install cmake -y
-  - sudo apt-get install g++-4.8 -y
   - git submodule update --init --recursive
   - cd SeetaFaceEngine && mkdir Release && cd Release && cmake .. && make && popd
 
