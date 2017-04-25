@@ -132,7 +132,7 @@ class Identifier(object):
         image_data = _Image()
         image_data.height, image_data.width = image.shape[:2]
         image_data.channels = 1 if image.ndim == 2 else image.shape[2]
-        byte_data = (c_ubyte * image.size)(*image.tobytes())
+        byte_data = image.tobytes()
         image_data.data = cast(byte_data, c_void_p)
         # prepare landmarks
         marks_data = _LandMarks()
