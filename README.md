@@ -8,7 +8,7 @@ python api for SeetaFaceEngine(https://github.com/seetaface/SeetaFaceEngine.git)
     on unix
     ```bash
     cd SeetaFaceEngine/
-    mkdir build; cd build
+    mkdir Release; cd Release
     cmake ..
     make  
     ```
@@ -16,7 +16,7 @@ python api for SeetaFaceEngine(https://github.com/seetaface/SeetaFaceEngine.git)
 
     ```bash
     cd SeetaFaceEngine/
-    mkdir build; cd build
+    mkdir Release; cd Release
     cmake -G "Visual Studio 14 2015 Win64" ..
     cmake --build . --config Release
     ```
@@ -24,9 +24,16 @@ python api for SeetaFaceEngine(https://github.com/seetaface/SeetaFaceEngine.git)
     + on linux & macOS, the default is `SeetaFaceEngine/library`
     + on windows, the default is  `SeetaFaceEngine/library/Release`
 5. run test
-    ```bash
-    python setup.py install
-    python test.py
-    ```
+
+    on ubuntu or unix
+	```bash
+	sudo python setup.py install
+	python test.py
+	```
+    on windows
+	```bash
+	python setup.py install
+	python test.py
+	```
 # tips
 If you want to use function of faceidentification, you need decompress the `seeta_fr_v1.0.part.1.rar` which located in `SeetaFaceEngine/model`
