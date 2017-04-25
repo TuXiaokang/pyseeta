@@ -20,9 +20,8 @@ python api for SeetaFaceEngine(https://github.com/seetaface/SeetaFaceEngine.git)
     cmake -G "Visual Studio 14 2015 Win64" ..
     cmake --build . --config Release
     ```
-4.  Add the dynamic lib path to system environment variables.
-    + on linux & macOS, the default is `SeetaFaceEngine/library`
-    + on windows, the default is  `SeetaFaceEngine/library/Release`
+4. the generated dynamic lib is in `SeetaFaceEngine/Release`
+
 5. run test
 
     on ubuntu or unix
