@@ -12,11 +12,13 @@ git:
 add_ons:
   apt:
     packages:
-      - cmake-3.7.0
       - g++
 
 
 before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install cmake -y
+  - sudo apt-get install gcc-5.1 -y
   - git submodule update --init --recursive
   - cd SeetaFaceEngine && mkdir Release && cd Release && cmake .. && make && popd
 
