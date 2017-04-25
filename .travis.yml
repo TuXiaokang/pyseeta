@@ -22,7 +22,7 @@ add_ons:
 
 before_install:
   - git submodule update --init --recursive
-  - cd SeetaFaceEngine && mkdir Release && cd Release && cmake .. && make && popd
+  - pushd SeetaFaceEngine && mkdir Release && cd Release && cmake .. && make && popd
 
 install:
   - python setup.py install
