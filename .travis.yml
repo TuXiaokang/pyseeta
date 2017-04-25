@@ -1,0 +1,27 @@
+sudo: required
+
+language: python
+
+python:
+  - "2.7"
+  - "3.5"
+  - "3.6"
+git:
+  submodules: false
+
+add_ons:
+  apt:
+    packages:
+      - cmake
+      - g++
+
+
+before_install:
+  - git submodule update --init --recursive
+  - cd SeetaFaceEngine && mkdir Release && cd Release && cmake .. && make && popd
+
+install:
+  - python setup.py install
+
+script: 
+  - python -c "import pyseeta"
