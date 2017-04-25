@@ -8,7 +8,7 @@ python api for SeetaFaceEngine(https://github.com/seetaface/SeetaFaceEngine.git)
     on unix
     ```bash
     cd SeetaFaceEngine/
-    mkdir build; cd build
+    mkdir Release; cd Release
     cmake ..
     make  
     ```
@@ -16,7 +16,7 @@ python api for SeetaFaceEngine(https://github.com/seetaface/SeetaFaceEngine.git)
 
     ```bash
     cd SeetaFaceEngine/
-    mkdir build; cd build
+    mkdir Release; cd Release
     cmake -G "Visual Studio 14 2015 Win64" ..
     cmake --build . --config Release
     ```
