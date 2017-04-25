@@ -1,3 +1,3 @@
 [submodule "SeetaFaceEngine"]
 	path = SeetaFaceEngine
-	url = https://github.com/seetaface/SeetaFaceEngine.git
+	url = git@github.com:TuXiaokang/SeetaFaceEngine.git
