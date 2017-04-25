@@ -64,7 +64,7 @@ class Identifier(object):
     def __init__(self, model_path=None):
         if model_path is None:
             model_path = 'SeetaFaceEngine/model/seeta_fr_v1.0.bin'
-        byte_model_path = bytes(model_path, encoding='utf-8')
+        byte_model_path = model_path.encode('utf-8')
         self.identifier = identi_lib.get_face_identifier(byte_model_path)
 
     def crop_face(self, image, landmarks):

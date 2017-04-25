@@ -65,7 +65,7 @@ class Detector(object):
         """
         if model_path is None:
             model_path = 'SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin'
-        byte_model_path = bytes(model_path, encoding='utf-8')
+        byte_model_path = model_path.encode('utf-8')
         self.detector = detect_lib.get_face_detector(byte_model_path)
         self.set_image_pyramid_scale_factor()
         self.set_min_face_size()
