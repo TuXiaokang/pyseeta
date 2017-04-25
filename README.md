@@ -1,5 +1,7 @@
-# pyseeta
-python api for SeetaFaceEngine(https://github.com/seetaface/SeetaFaceEngine.git)
+# pyseeta: python api for [SeetaFaceEngine](https://github.com/seetaface/SeetaFaceEngine.git)
+
+[![Build Status](https://travis-ci.org/TuXiaokang/pyseeta.svg?branch=master)](https://travis-ci.org/TuXiaokang/pyseeta)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/TuXiaokang/pyseeta/blob/master/LICENSE)
 ## for detection
 <img src="images/chloecalmon_det.jpg" width = '70%'/>
 
