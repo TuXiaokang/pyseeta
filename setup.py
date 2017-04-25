@@ -2,7 +2,14 @@ from setuptools import setup, find_packages
 import sys, os
 
 dylib_dir = 'SeetaFaceEngine/Release'
-dylibs = [os.path.join(dylib_dir, x) for x in os.listdir(dylib_dir)]
+cpylibs = [os.path.join(dylib_dir, x) for x in os.listdir(dylib_dir)]
+
+dylibs = []
+#print cpylibs
+for f in cpylibs :
+	if os.path.isfile(f) :
+		dylibs.append(f)
+#print dylibs
 
 setup(
     name ='pyseeta',
