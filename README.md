@@ -1,15 +1,16 @@
 # pyseeta
 python api for SeetaFaceEngine(https://github.com/seetaface/SeetaFaceEngine.git)
-## For detection & Alignment
-|Face Detectin|Face Alignment|
-|-|-|
-|![](images/chloecalmon_det.jpg)|![](images/chloecalmon_Align.jpg)|
+## for detection
+<img src="images/chloecalmon_det.jpg" width = '70%'/>
 
-## For identification
-|||
-|-|-|
-|![](images/single_id.jpg)|![](images/double_id.jpg)|
+## for alignment
+<img src="images/chloecalmon_align.jpg" width = '70%'/>
 
+## for identification
+<div align='center'>
+    <img src="images/single_id.jpg" width = "300"/>
+    <img src="images/double_id.jpg" width = "400"/>
+</div>
 
 # installation
 1. Download pyseeta(https://github.com/TuXiaokang/pyseeta.git)
