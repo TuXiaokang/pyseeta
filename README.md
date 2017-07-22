@@ -2,18 +2,17 @@
 
 [![Build Status](https://travis-ci.org/TuXiaokang/pyseeta.svg?branch=master)](https://travis-ci.org/TuXiaokang/pyseeta)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/TuXiaokang/pyseeta/blob/master/LICENSE)
+## for detection
+<img src="images/chloecalmon_det.jpg" width = '70%'/>
 
-## for detection & alignment
-<figure class='half'>
-  <img src="images/chloecalmon_det.jpg"/>
-  <img src="images/chloecalmon_align.jpg"/>
-</figure>
+## for alignment
+<img src="images/chloecalmon_align.jpg" width = '70%'/>
 
 ## for identification
-<figure class='half'>
-  <img src="images/single_id.jpg"/>
-  <img src="images/double_id.jpg"/>
-</figure>
+<div align='center'>
+    <img src="images/single_id.jpg" width = "300"/>
+    <img src="images/double_id.jpg" width = "400"/>
+</div>
 
 Installation
 ---
