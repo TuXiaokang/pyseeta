@@ -30,9 +30,10 @@ try:
     from PIL import Image, ImageDraw
     import numpy as np
 except ImportError:
-    print('Pillow can not be find')
+    raise ImportError('Pillow can not be found!')
 
 def test_detector():
+    print('test detector:')
     # load model
     detector = Detector('SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
     detector.set_min_face_size(30)
@@ -48,6 +49,7 @@ def test_detector():
     detector.release()
 
 def test_aligner():
+    print('test aligner:')
     # load model
     detector = Detector('SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
     detector.set_min_face_size(30)
@@ -71,8 +73,7 @@ def test_aligner():
     detector.release()
 
 def test_identifier():
-    import cv2
-    import numpy as np
+    print('test identifier:')
     detector = Detector('SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
     aligner = Aligner('SeetaFaceEngine/model/seeta_fa_v1.1.bin')
     identifier = Identifier('SeetaFaceEngine/model/seeta_fr_v1.0.bin')
@@ -115,6 +116,6 @@ def test_identifier():
     detector.release()
 
 if __name__ == '__main__':
-    #test_detector()
-    #test_aligner()
+    test_detector()
+    test_aligner()
     test_identifier()

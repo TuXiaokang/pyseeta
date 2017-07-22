@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-
+import numpy as np
 from ctypes import *
 from ctypes.util import find_library
 from .common import _Face, _LandMarks, _Image
@@ -51,20 +51,25 @@ class Aligner(object):
         """
         if model_path is None:
             model_path = 'SeetaFaceEngine/model/seeta_fa_v1.1.bin'
-        if not os.path.isfile(model_path):
-            raise RuntimeError('No such file')
+        assert os.path.isfile(model_path) is True, 'No such file'
         byte_model_path = model_path.encode('utf-8')
         self.aligner = align_lib.get_face_aligner(byte_model_path)
-    
-    def align(self, image, face):
+
+    def align(self, image=None, face=None):
         """
-        input:\n 
+        input:\n
         @param image: a gray scale image.\n
         @param face: a face object.\n
         output: a list of point (x,y)
         """
-        if image.ndim != 2:
-            raise ValueError('The input not a gray scale image!')
+        assert image is not None, 'Image cannot be None'
+        assert face is not None, 'Face cannot be None'
+
+        # handle pillow image
+        if not isinstance(image, np.ndarray):
+            image = np.array(image)
+
+        assert len(image.shape) is 2, 'Input is not a gray scale image!'
         #prepare image data
         image_data = _Image()
         image_data.height, image_data.width = image.shape
@@ -87,7 +92,7 @@ class Aligner(object):
         return landmarks
 
     def release(self):
-        """ 
+        """
         release aligner memory
         """
         align_lib.free_aligner(self.aligner)

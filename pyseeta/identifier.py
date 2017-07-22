@@ -64,8 +64,8 @@ class Identifier(object):
     def __init__(self, model_path=None):
         if model_path is None:
             model_path = 'SeetaFaceEngine/model/seeta_fr_v1.0.bin'
-        if not os.path.isfile(model_path):
-            raise RuntimeError('No such file')
+        assert os.path.isfile(model_path) is True, 'No such file!'
+
         byte_model_path = model_path.encode('utf-8')
         self.identifier = identi_lib.get_face_identifier(byte_model_path)
 
@@ -74,14 +74,20 @@ class Identifier(object):
         Args:
             image: a color image
             landmarks: a list of point (x,y), length is five
-        
+
         Returns:
             a numpy array image
         """
+        # handle pillow image
+        if not isinstance(image, np.ndarray):
+            image = np.array(image)
+            if len(image.shape) == 3:
+                image = image[:,:,::-1]
+
         # prepare image data
         image_data = _Image()
         image_data.height, image_data.width = image.shape[:2]
-        image_data.channels = 1 if image.ndim == 2 else image.shape[2]
+        image_data.channels = 1 if len(image.shape) == 2 else image.shape[2]
         image_data.data = image.ctypes.data
         # prepare landmarks
         marks_data = _LandMarks()
@@ -98,20 +104,30 @@ class Identifier(object):
         image_crop = np.fromstring(byte_data, dtype=np.uint8).reshape(crop_shape)
         # free crop data
         identi_lib.free_image_data(crop_data)
+
+        if not isinstance(image, np.ndarray):
+            image_crop = image_crop[:,:,::-1]
+
         return image_crop
 
     def extract_feature(self, image):
         """ Extract feature of cropped face image
         Args:
             image: a color image
-        
+
         Returns:
             a list of float, the length is 2048
         """
+        # handle pillow image
+        if not isinstance(image, np.ndarray):
+            image = np.array(image)
+            if len(image.shape) == 3:
+                image = image[:,:,::-1]
+
         # prepare image data
         image_data = _Image()
-        image_data.height, image_data.width = image.shape[0:2]
-        image_data.channels = 1 if image.ndim == 2 else image.shape[2]
+        image_data.height, image_data.width = image.shape[:2]
+        image_data.channels = 1 if len(image.shape) == 2 else image.shape[2]
         image_data.data = image.ctypes.data
         # call extract_feature function
         root = identi_lib.extract_feature(self.identifier, byref(image_data))
@@ -129,10 +145,16 @@ class Identifier(object):
         Returns:
             a list of float, the length is 2048
         """
+        # handle pillow image
+        if not isinstance(image, np.ndarray):
+            image = np.array(image)
+            if len(image.shape) == 3:
+                image = image[:,:,::-1]
+
         # prepare image data
         image_data = _Image()
         image_data.height, image_data.width = image.shape[:2]
-        image_data.channels = 1 if image.ndim == 2 else image.shape[2]
+        image_data.channels = 1 if len(image.shape) == 2 else image.shape[2]
         image_data.data = image.ctypes.data
         # prepare landmarks
         marks_data = _LandMarks()
@@ -152,7 +174,7 @@ class Identifier(object):
             featA: a list of float, the length is 2048
             featB: a list of float, the length is 2048
         Returns:
-            a list of float, the length is 2048        
+            a list of float, the length is 2048
         """
         # prepare feature array
         feat_a = (c_float * 2048)(*featA)

@@ -26,8 +26,14 @@ from pyseeta import Detector
 from pyseeta import Aligner
 from pyseeta import Identifier
 
-def test_detector():
+try:
     import cv2
+    import numpy as np
+except ImportError:
+    raise ImportError('opencv can not be found!')
+
+def test_detector():
+    print('test detector:')
     # load model
     detector = Detector('SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
     detector.set_min_face_size(30)
@@ -43,39 +49,39 @@ def test_detector():
         cv2.putText(image_color, str(i), (face.left, face.bottom),cv2.FONT_HERSHEY_COMPLEX, 1, (0,255,0), thickness=1)
     cv2.imshow('test', image_color)
     cv2.waitKey(0)
- 
+
     detector.release()
 
 def test_aligner():
-    import cv2
+    print('test aligner:')
     # load model
     detector = Detector('SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
     detector.set_min_face_size(30)
     aligner = Aligner('SeetaFaceEngine/model/seeta_fa_v1.1.bin')
-    
+
     image_color = cv2.imread('data/chloecalmon.png')
     image_gray = cv2.cvtColor(image_color, cv2.COLOR_BGR2GRAY)
-    
+
     faces = detector.detect(image_gray)
 
     for face in faces:
         landmarks = aligner.align(image_gray, face)
         for point in landmarks:
             cv2.circle(image_color, point, 1, (0,255,0), 2)
-    
+
     cv2.imshow('test aligner', image_color)
     cv2.waitKey(0)
-   
+
     aligner.release()
     detector.release()
 
 def test_identifier():
-    import cv2
-    import numpy as np
+    print('test identifier:')
+    # load model
     detector = Detector('SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
     aligner = Aligner('SeetaFaceEngine/model/seeta_fa_v1.1.bin')
     identifier = Identifier('SeetaFaceEngine/model/seeta_fr_v1.0.bin')
-    
+
     # load image
     image_color_A = cv2.imread('data/single.jpg')
     image_gray_A = cv2.cvtColor(image_color_A, cv2.COLOR_BGR2GRAY)
@@ -109,4 +115,6 @@ def test_identifier():
     detector.release()
 
 if __name__ == '__main__':
+    test_detector()
+    test_aligner()
     test_identifier()

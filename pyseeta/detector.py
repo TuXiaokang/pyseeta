@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 import copy as cp
+import numpy as np
 import os
 import sys
 from ctypes import *
@@ -58,31 +59,34 @@ detect_lib.free_detector.restype = None
 class Detector(object):
     """ Class for face detecor
     """
-    
     def __init__(self, model_path=None):
-        """ 
+        """
         input: the path of detecor model file
         """
         if model_path is None:
             model_path = 'SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin'
-        if not os.path.isfile(model_path):
-            raise RuntimeError('No such file')
+
+        assert os.path.isfile(model_path) is True, 'No such file!'
+
         byte_model_path = model_path.encode('utf-8')
         self.detector = detect_lib.get_face_detector(byte_model_path)
         self.set_image_pyramid_scale_factor()
         self.set_min_face_size()
         self.set_score_thresh()
-        self.set_window_step() 
+        self.set_window_step()
 
     def detect(self, image):
-        """ 
+        """
         Args:
             image: a gray scale image which can be a PIL image or a opencv image.\n
         Returns:
             a list of Face object
         """
-        if image.ndim != 2:
-            raise ValueError('The input not a gray scale image!')
+        assert image is not None, 'Input can not be None'
+        if not isinstance(image, np.ndarray): # pillow image
+            image = np.array(image)
+        assert len(image.shape) is 2, 'Input is not a grayscale image'
+
         # prepare image data
         image_data = _Image()
         image_data.height, image_data.width = image.shape
@@ -107,21 +111,21 @@ class Detector(object):
         image_data = None
         faces.sort(key=lambda i: -1 * (i.bottom - i.top) * (i.right - i.left))
         return faces
-    
+
     def set_image_pyramid_scale_factor(self, scale_factor=0.8):
         detect_lib.set_image_pyramid_scale_factor(self.detector, scale_factor)
-    
+
     def set_min_face_size(self, min_face_size=40):
         detect_lib.set_min_face_size(self.detector, min_face_size)
-    
+
     def set_score_thresh(self, score_thresh=2.0):
         detect_lib.set_score_thresh(self.detector, score_thresh)
-    
-    def set_window_step(self, window_step=[4,4]):
+
+    def set_window_step(self, window_step=(4,4)):
         detect_lib.set_window_step(self.detector, window_step[0], window_step[1])
-    
+
     def release(self):
-        """ 
+        """
         release detector memory
         """
         detect_lib.free_detector(self.detector)
