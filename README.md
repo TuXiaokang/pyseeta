@@ -14,7 +14,8 @@
     <img src="images/double_id.jpg" width = "400"/>
 </div>
 
-# installation
+Installation
+---
 1. Download pyseeta(https://github.com/TuXiaokang/pyseeta.git)
 2. `git submodule update --init --recursive`
 3. Build `SeetaFaceEngine` dynamic library.
@@ -53,5 +54,12 @@
 	python setup.py install
 	python test.py
 	```
-# tips
+
+Update Log
+---
+* **v0.3.0**
+  + support pillow image
+
+Tips
+---
 If you want to use function of faceidentification, you need decompress the `seeta_fr_v1.0.part.1.rar` which located in `SeetaFaceEngine/model`

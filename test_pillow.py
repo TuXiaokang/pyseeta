@@ -57,7 +57,7 @@ def test_aligner():
 
     image_color = Image.open('data/chloecalmon.png').convert('RGB')
     image_gray = image_color.convert('L')
-
+    print(np.array(image_gray))
     faces = detector.detect(image_gray)
     draw = ImageDraw.Draw(image_color)
     draw.ellipse ((0,0,40,80), fill=128)
@@ -115,7 +115,28 @@ def test_identifier():
     aligner.release()
     detector.release()
 
+def test_cropface():
+    detector = Detector('SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
+    detector.set_min_face_size(30)
+    aligner = Aligner('SeetaFaceEngine/model/seeta_fa_v1.1.bin')
+    identifier = Identifier('SeetaFaceEngine/model/seeta_fr_v1.0.bin')
+
+    image_color = Image.open('data/chloecalmon.png').convert('RGB')
+    image_gray = image_color.convert('L')
+    import cv2
+    faces = detector.detect(image_gray)
+    for face in faces:
+        landmarks = aligner.align(image_gray, face)
+        crop_face = identifier.crop_face(image_color, landmarks)
+        Image.fromarray(crop_face).show()
+
+    identifier.release()
+    aligner.release()
+    detector.release()
+
 if __name__ == '__main__':
+
     test_detector()
-    test_aligner()
-    test_identifier()
+    # test_aligner()
+    # test_identifier()
+    # test_cropface()

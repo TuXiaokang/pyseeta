@@ -81,8 +81,6 @@ class Identifier(object):
         # handle pillow image
         if not isinstance(image, np.ndarray):
             image = np.array(image)
-            if len(image.shape) == 3:
-                image = image[:,:,::-1]
 
         # prepare image data
         image_data = _Image()
@@ -105,9 +103,6 @@ class Identifier(object):
         # free crop data
         identi_lib.free_image_data(crop_data)
 
-        if not isinstance(image, np.ndarray):
-            image_crop = image_crop[:,:,::-1]
-
         return image_crop
 
     def extract_feature(self, image):
@@ -121,8 +116,6 @@ class Identifier(object):
         # handle pillow image
         if not isinstance(image, np.ndarray):
             image = np.array(image)
-            if len(image.shape) == 3:
-                image = image[:,:,::-1]
 
         # prepare image data
         image_data = _Image()
@@ -148,8 +141,6 @@ class Identifier(object):
         # handle pillow image
         if not isinstance(image, np.ndarray):
             image = np.array(image)
-            if len(image.shape) == 3:
-                image = image[:,:,::-1]
 
         # prepare image data
         image_data = _Image()

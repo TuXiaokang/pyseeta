@@ -38,9 +38,8 @@ def test_detector():
     detector = Detector('SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
     detector.set_min_face_size(30)
 
-    image_color = cv2.imread('data/chloecalmon.png')
+    image_color = cv2.imread('data/chloecalmon.png', cv2.IMREAD_COLOR)
     image_gray = cv2.cvtColor(image_color, cv2.COLOR_BGR2GRAY)
-
     faces = detector.detect(image_gray)
 
     for i, face in enumerate(faces):
@@ -59,7 +58,7 @@ def test_aligner():
     detector.set_min_face_size(30)
     aligner = Aligner('SeetaFaceEngine/model/seeta_fa_v1.1.bin')
 
-    image_color = cv2.imread('data/chloecalmon.png')
+    image_color = cv2.imread('data/chloecalmon.png', cv2.IMREAD_COLOR)
     image_gray = cv2.cvtColor(image_color, cv2.COLOR_BGR2GRAY)
 
     faces = detector.detect(image_gray)
@@ -83,9 +82,9 @@ def test_identifier():
     identifier = Identifier('SeetaFaceEngine/model/seeta_fr_v1.0.bin')
 
     # load image
-    image_color_A = cv2.imread('data/single.jpg')
+    image_color_A = cv2.imread('data/single.jpg', cv2.IMREAD_COLOR)
     image_gray_A = cv2.cvtColor(image_color_A, cv2.COLOR_BGR2GRAY)
-    image_color_B = cv2.imread('data/double.jpg')
+    image_color_B = cv2.imread('data/double.jpg', cv2.IMREAD_COLOR)
     image_gray_B = cv2.cvtColor(image_color_B, cv2.COLOR_BGR2GRAY)
     # detect face in image
     faces_A = detector.detect(image_gray_A)
@@ -116,5 +115,5 @@ def test_identifier():
 
 if __name__ == '__main__':
     test_detector()
-    test_aligner()
-    test_identifier()
+    # test_aligner()
+    # test_identifier()
