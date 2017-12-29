@@ -10,8 +10,6 @@ Copyright (c) 2006      Idiap Research Institute (Samy Bengio)
 Copyright (c) 2001-2004 Idiap Research Institute (Ronan Collobert, Samy Bengio, Johnny Mariethoz)
 '''
 
-import torch
-
 import hashlib
 import os
 import re
