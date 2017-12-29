@@ -15,55 +15,61 @@
     <img src="images/double_id.jpg" width = "400"/>
 </div>
 
-Installation
----
+## Installation
 
-1. Download pyseeta(https://github.com/TuXiaokang/pyseeta.git)
-2. `git submodule update --init --recursive`
+1. Download [pyseeta](https://github.com/TuXiaokang/pyseeta.git)
+
+```bash
+git clone https://github.com/TuXiaokang/pyseeta.git
+```
+
+2. Download [SeetaFaceEngine](https://github.com/TuXiaokang/SeetaFaceEngine.git)
+
+```bash
+git submodule update --init --recursive
+```
+
 3. Build `SeetaFaceEngine` dynamic library.
 
-    on unix
-    ```bash
-    cd SeetaFaceEngine/
-    mkdir Release; cd Release
-    cmake ..
-    make  
-    ```
-    on windows
+> on unix
 
-    ```bash
-    cd SeetaFaceEngine/
-    mkdir Release; cd Release
-    cmake -G "Visual Studio 14 2015 Win64" ..
-    cmake --build . --config Release
-    ```
-4. the generated dynamic lib is in `SeetaFaceEngine/Release`
+```bash
+cd SeetaFaceEngine/
+mkdir Release; cd Release
+cmake ..
+make  
+```
 
-5. installation
+> on windows
 
-    ```bash
-    python setup.py install
-    ```
+```bash
+cd SeetaFaceEngine/
+mkdir Release; cd Release
+cmake -G "Visual Studio 14 2015 Win64" ..
+cmake --build . --config Release
+```
 
-6. run test demo
-    
-    ```bash
-	python test_opencv.py
-    ```
-    or
-    ```bash
-    python test_pillow.py
-	```
+4. installation
 
-Uninstallation
----
+```bash
+python setup.py install
+```
+
+5. run test demo
+
+```bash
+python test_opencv.py or test_pillow.py 
+```
+
+## Uninstallation
+
     
 ```bash
 pip uninstall pyseeta
 ```
 
-Update Log
----
+## Update Log
+
 
 * **v0.4.0**
   + pretrained model is separate from submodule (`SeetaFaceEngine`) now, which makes clone opreration easier.
