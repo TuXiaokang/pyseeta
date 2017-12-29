@@ -9,7 +9,7 @@ dylibs = [os.path.join(dylib_dir, x) for x in os.listdir(dylib_dir) if x.split('
 setup(
     name ='pyseeta',
 
-    version = 0.3,
+    version = 0.4,
 
     description = 'A simple Python interface for the SeetaFaceEngine',
 
