@@ -65,7 +65,4 @@ Update Log
 * **v0.3.0**
   1. support pillow image
 
-Tips
----
 
-If you want to use function of faceidentification, you need decompress the `seeta_fr_v1.0.part.1.rar` which located in `SeetaFaceEngine/model`
