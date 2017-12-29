@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/TuXiaokang/pyseeta.svg?branch=master)](https://travis-ci.org/TuXiaokang/pyseeta)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/TuXiaokang/pyseeta/blob/master/LICENSE)
+
 ## for detection
 <img src="images/chloecalmon_det.jpg" width = '70%'/>
 
@@ -16,6 +17,7 @@
 
 Installation
 ---
+
 1. Download pyseeta(https://github.com/TuXiaokang/pyseeta.git)
 2. `git submodule update --init --recursive`
 3. Build `SeetaFaceEngine` dynamic library.
@@ -38,28 +40,32 @@ Installation
 4. the generated dynamic lib is in `SeetaFaceEngine/Release`
 
 5. run test
+    
+    ```bash
+	python test_opencv.py
+    ```
+    or
+    ```bash
+    python test_pillow.py
+	```
 
-    on ubuntu
-	```bash
-	sudo python setup.py install
-	sudo apt-get install unrar
-	cd SeetaFaceEngine/model/
-	unrar e seeta_fr_v1.0.part1.rar
-	cd ..
-	cd ..
-	python test.py
-	```
-    on windows
-	```bash
-	python setup.py install
-	python test.py
-	```
+Uninstallation
+---
+    
+```bash
+pip uninstall pyseeta
+```
 
 Update Log
 ---
+
+* **v0.4.0**
+  1. auto download pretrained weights
+
 * **v0.3.0**
-  + support pillow image
+  1. support pillow image
 
 Tips
 ---
+
 If you want to use function of faceidentification, you need decompress the `seeta_fr_v1.0.part.1.rar` which located in `SeetaFaceEngine/model`
