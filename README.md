@@ -60,9 +60,10 @@ Update Log
 ---
 
 * **v0.4.0**
-  1. auto download pretrained weights
+  + pretrained model is separate from submodule (`SeetaFaceEngine`) now, which makes clone opreration easier.
+  + pretrained model could be automatic downloaded.
 
 * **v0.3.0**
-  1. support pillow image
+  + support pillow image
 
 
