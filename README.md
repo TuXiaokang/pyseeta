@@ -39,7 +39,13 @@ Installation
     ```
 4. the generated dynamic lib is in `SeetaFaceEngine/Release`
 
-5. run test
+5. installation
+
+    ```bash
+    python setup.py install
+    ```
+
+6. run test demo
     
     ```bash
 	python test_opencv.py
