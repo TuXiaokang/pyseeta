@@ -122,7 +122,7 @@ def test_cropface():
 
     image_color = Image.open('data/chloecalmon.png').convert('RGB')
     image_gray = image_color.convert('L')
-    import cv2
+    
     faces = detector.detect(image_gray)
     for face in faces:
         landmarks = aligner.align(image_gray, face)
