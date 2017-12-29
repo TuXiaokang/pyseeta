@@ -35,7 +35,7 @@ except ImportError:
 def test_detector():
     print('test detector:')
     # load model
-    detector = Detector('SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
+    detector = Detector()
     detector.set_min_face_size(30)
 
     image_color = Image.open('data/chloecalmon.png').convert('RGB')
@@ -51,13 +51,12 @@ def test_detector():
 def test_aligner():
     print('test aligner:')
     # load model
-    detector = Detector('SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
+    detector = Detector()
     detector.set_min_face_size(30)
-    aligner = Aligner('SeetaFaceEngine/model/seeta_fa_v1.1.bin')
+    aligner = Aligner()
 
     image_color = Image.open('data/chloecalmon.png').convert('RGB')
     image_gray = image_color.convert('L')
-    print(np.array(image_gray))
     faces = detector.detect(image_gray)
     draw = ImageDraw.Draw(image_color)
     draw.ellipse ((0,0,40,80), fill=128)
@@ -74,9 +73,9 @@ def test_aligner():
 
 def test_identifier():
     print('test identifier:')
-    detector = Detector('SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
-    aligner = Aligner('SeetaFaceEngine/model/seeta_fa_v1.1.bin')
-    identifier = Identifier('SeetaFaceEngine/model/seeta_fr_v1.0.bin')
+    detector = Detector()
+    aligner = Aligner()
+    identifier = Identifier()
 
     # load image
     image_color_A = Image.open('data/single.jpg').convert('RGB')
@@ -116,10 +115,10 @@ def test_identifier():
     detector.release()
 
 def test_cropface():
-    detector = Detector('SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
+    detector = Detector()
     detector.set_min_face_size(30)
-    aligner = Aligner('SeetaFaceEngine/model/seeta_fa_v1.1.bin')
-    identifier = Identifier('SeetaFaceEngine/model/seeta_fr_v1.0.bin')
+    aligner = Aligner()
+    identifier = Identifier()
 
     image_color = Image.open('data/chloecalmon.png').convert('RGB')
     image_gray = image_color.convert('L')

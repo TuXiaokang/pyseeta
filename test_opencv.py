@@ -35,7 +35,7 @@ except ImportError:
 def test_detector():
     print('test detector:')
     # load model
-    detector = Detector('SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
+    detector = Detector()
     detector.set_min_face_size(30)
 
     image_color = cv2.imread('data/chloecalmon.png', cv2.IMREAD_COLOR)
@@ -54,9 +54,9 @@ def test_detector():
 def test_aligner():
     print('test aligner:')
     # load model
-    detector = Detector('SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
+    detector = Detector()
     detector.set_min_face_size(30)
-    aligner = Aligner('SeetaFaceEngine/model/seeta_fa_v1.1.bin')
+    aligner = Aligner()
 
     image_color = cv2.imread('data/chloecalmon.png', cv2.IMREAD_COLOR)
     image_gray = cv2.cvtColor(image_color, cv2.COLOR_BGR2GRAY)
@@ -77,9 +77,9 @@ def test_aligner():
 def test_identifier():
     print('test identifier:')
     # load model
-    detector = Detector('SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin')
-    aligner = Aligner('SeetaFaceEngine/model/seeta_fa_v1.1.bin')
-    identifier = Identifier('SeetaFaceEngine/model/seeta_fr_v1.0.bin')
+    detector = Detector()
+    aligner = Aligner()
+    identifier = Identifier()
 
     # load image
     image_color_A = cv2.imread('data/single.jpg', cv2.IMREAD_COLOR)

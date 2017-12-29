@@ -29,7 +29,7 @@ from ctypes.util import find_library
 
 from .common import Face, _Face, _Image
 from .config import get_detector_library
-
+from .model_zoo import load_url
 lib_path = find_library('seeta_fd_lib')
 
 if lib_path is None:
@@ -54,7 +54,7 @@ detect_lib.free_face_list.restype = None
 detect_lib.free_detector.argtypes = [c_void_p]
 detect_lib.free_detector.restype = None
 
-
+MODEL_URL = 'http://198.13.45.221/files/seeta_fd_frontal_v1.0-c4619d06.bin'
 
 class Detector(object):
     """ Class for face detecor
@@ -64,7 +64,7 @@ class Detector(object):
         input: the path of detecor model file
         """
         if model_path is None:
-            model_path = 'SeetaFaceEngine/model/seeta_fd_frontal_v1.0.bin'
+            model_path = load_url(MODEL_URL)
 
         assert os.path.isfile(model_path) is True, 'No such file!'
 

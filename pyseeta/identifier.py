@@ -30,7 +30,7 @@ import numpy as np
 
 from .common import _Face, _Image, _LandMarks
 from .config import get_identifier_library
-
+from .model_zoo import load_url
 lib_path = find_library('seeta_fi_lib')
 
 if lib_path is None:
@@ -57,13 +57,14 @@ identi_lib.free_image_data.argtypes = [POINTER(_Image)]
 identi_lib.free_identifier.restype = None
 identi_lib.free_identifier.argtypes = [c_void_p]
 
+MODEL_URL = 'http://198.13.45.221/files/seeta_fr_v1.0-73a744ba.bin'
 
 class Identifier(object):
     """ Class for Face identification
     """
     def __init__(self, model_path=None):
         if model_path is None:
-            model_path = 'SeetaFaceEngine/model/seeta_fr_v1.0.bin'
+            model_path = load_url(MODEL_URL)
         assert os.path.isfile(model_path) is True, 'No such file!'
 
         byte_model_path = model_path.encode('utf-8')

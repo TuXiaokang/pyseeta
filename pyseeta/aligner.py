@@ -25,6 +25,7 @@ from ctypes import *
 from ctypes.util import find_library
 from .common import _Face, _LandMarks, _Image
 from .config import get_aligner_library
+from .model_zoo import load_url
 import sys, os
 
 lib_path = find_library('seeta_fa_lib')
@@ -41,16 +42,18 @@ align_lib.align.argtypes = [c_void_p, POINTER(_Image), POINTER(_Face)]
 align_lib.free_aligner.restype = None
 align_lib.free_aligner.argtypes = [c_void_p]
 
+MODEL_URL = 'http://198.13.45.221/files/seeta_fa_v1.1-81bae35b.bin'
+
 class Aligner(object):
     """ Class for Face Alignment
     """
-    def __init__(self, model_path):
+    def __init__(self, model_path=None):
         """
         input\n
         @param model_path: the path of aligner model
         """
         if model_path is None:
-            model_path = 'SeetaFaceEngine/model/seeta_fa_v1.1.bin'
+            model_path = load_url(MODEL_URL)
         assert os.path.isfile(model_path) is True, 'No such file'
         byte_model_path = model_path.encode('utf-8')
         self.aligner = align_lib.get_face_aligner(byte_model_path)
