@@ -55,7 +55,7 @@ cmake --build . --config Release
 python setup.py install
 ```
 
-5. run test demo
+5. run examples
 
 ```bash
 python test_opencv.py or test_pillow.py 
